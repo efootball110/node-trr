@@ -77,7 +77,7 @@ socket.on("receive-location", (data) => {
     const { id, latitude, longitude, firstName } = data;
 
     // Center the map on the location
-    map.setView([latitude, longitude], 16);
+    map.setView([latitude, longitude], 0);
 
     // Check if marker for the user already exists
     if (markers[id]) {
