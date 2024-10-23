@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IP Geolocation Example</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <style>
+        #map { height: 400px; }
+    </style>
+</head>
+<body>
+
+<h1>Your Approximate Location on the Map</h1>
+<button id="get-location">Get My Approximate Location</button>
+<div id="map"></div>
+
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+<script>
+    document.getElementById('get-location').addEventListener('click', () => {
+        fetch('https://api.ipapi.com/api/check?access_key=YOUR_ACCESS_KEY')
+            .then(response => response.json())
+            .then(data => {
+                const latitude = data.latitude;
+                const longitude = data.longitude;
+
+                // Initialize the map
+                const map = L.map('map').setView([latitude, longitude], 13);
+
+                // Set the map tiles
+                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                    maxZoom: 19
+                }).addTo(map);
+
+                // Add a marker at the approximate location
+                L.marker([latitude, longitude]).addTo(map)
+                    .bindPopup("Your approximate location!")
+                    .openPopup();
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+    });
+</script>
+
+</body>
+</html>
