@@ -89,7 +89,7 @@ socket.on("receive-location", (data) => {
         // Create a new marker with a popup
         markers[id] = L.marker([latitude, longitude])
             .addTo(map)
-            .bindPopup(`Location of user ${id}`) // Add popup information
+            .bindPopup(`Location of user ${firstName}`) // Add popup information
             .openPopup(); // Automatically open the popup when marker is added
     }
 });
