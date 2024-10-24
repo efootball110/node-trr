@@ -129,8 +129,7 @@ const markers = {};
 socket.on("receive-location", (data) => {
     const { id, latitude, longitude, firstName } = data;
 
-    // Center the map on the location
-    map.setView([latitude, longitude], 16);
+    
 
     // Check if marker for the user already exists
     if (markers[id]) {
@@ -144,6 +143,8 @@ socket.on("receive-location", (data) => {
             .addTo(map)
             .bindPopup(`Location of user ${firstName}`) // Add popup information
             .openPopup(); // Automatically open the popup when marker is added
+        // Center the map on the location
+        map.setView([latitude, longitude], 16);
     }
 });
 
