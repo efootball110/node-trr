@@ -12,7 +12,7 @@ io.on("connection",function(socket){
     socket.on("send-location",function(data){
         io.emit("receive-location",{id:socket.id,...data})
     })
-    console.log("Connected!!")
+    console.log(`Connected!! to ${socket.id}`)
 })
 
 app.set('view engine', 'ejs')
